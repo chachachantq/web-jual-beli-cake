@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cake House | Login & Penjualan Cake Online</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f9f9f9;
+    }
+
+    #login-page {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f5a623, #f76c6c);
+    }
+
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #f76c6c;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .login-box button {
+      width: 100%;
+      background-color: #f76c6c;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-box button:hover {
+      background-color: #f5a623;
+    }
+
+    #main-page {
+      display: none;
+      min-height: 100vh;
+      background: #fffaf5;
+    }
+
+    header {
+      background-color: #f76c6c;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: scale(1.02);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-info h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #f76c6c;
+    }
+
+    .price {
+      color: #f5a623;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .desc {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    button.buy-btn {
+      width: 100%;
+      margin-top: 10px;
+      background-color: #f76c6c;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    button.buy-btn:hover {
+      background-color: #f5a623;
+    }
+
+    footer {
+      background: #f5a623;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="login-page">
+    <div class="login-box">
+      <h2>Shopia Cake🍰</h2>
+      <p>Silakan login untuk melanjutkan</p>
+      <input type="text" id="username" placeholder="Nama pengguna" required />
+      <input type="password" id="password" placeholder="Kata sandi" required />
+      <button onclick="login()">Masuk</button>
+      <p id="error-msg" style="color:red; margin-top:10px; display:none;">Nama pengguna atau sandi salah!</p>
+    </div>
+  </section>
+
+  <section id="main-page">
+    <header>🎂Shopia Cake | Penjualan Cake Online</header>
+
+    <div class="container">
+      <h2 style="text-align:center; color:#f76c6c;">Daftar Cake Pilihan</h2>
+      <div class="products">
+
+        <div class="product">
+          <img src="wedding gold.jpg" alt="Wedding Cake">
+          <div class="product-info">
+            <h3>Wedding Cake </h3>
+            <div class="price">Rp 250.000</div>
+            <div class="desc">Cake coklat lembut yang dibaluti krim yang manis, lalu dihias dengan bola-bola, bunga, dan patung wedding.</div>
+            <button class="buy-btn" onclick="wedding_cake.html">Beli </button>
+
+          </div>
+        </div>
+
+        <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+        <div class="product">
+          <img src="khitanan1.jpg" alt="Cheesecake">
+          <div class="product-info">
+            <h3>Khitan Dino Cake</h3>
+            <div class="price">Rp 170.000</div>
+            <div class="desc">Black forest yang dibaluti krim hijau manis dan dihiasi oleh topper dinosaurus.</div>
+            <button class="buy-btn" onclick="beli('Khitan Dino Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+         <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+         <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+         <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+         <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+         <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+         <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+         <div class="product">
+          <img src="anniv2.jpg" alt="Love Anniversary Cake">
+          <div class="product-info">
+            <h3>Love Anniversary Cake</h3>
+            <div class="price">Rp 150.000</div>
+            <div class="desc">Black forest yang dibaluti krim manis dengan krim merah manis sebagai hiasan love dan tulisan happy anniversary.</div>
+            <button class="buy-btn" onclick="beli('Love Anniversary Cake')">Beli Sekarang</button>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+
+    <footer>© 2025 Shopia Cake | Dibuat dengan ❤ oleh Marsha Shopia Agustina</footer>
+  </section>
+
+  <script>
+    // Login sederhana
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const errorMsg = document.getElementById('error-msg');
+
+      if (user === 'pelanggan' && pass === '12345') {
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('main-page').style.display = 'block';
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    // Fungsi tombol beli
+    function beli(namaCake) {
+      alert('Terima kasih telah membeli ' + namaCake + '! 🍰');
+    }
+  </script>
+</body>
+</html>

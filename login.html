@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Shopia Cake</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <h2>Selamat Datang di <span>Shopia Cake</span> 🍰</h2>
+    <p class="subtitle">Masuk untuk menikmati kue terbaik kami!</p>
+
+    <form id="loginForm">
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Username" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn-login">Masuk</button>
+    </form>
+
+    <p id="error-msg"></p>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('error-msg');
+
+      if (username === "admin" && password === "cake123") {
+        localStorage.setItem("isLoggedIn", "true");
+        window.location.href = "index.html";
+      } else {
+        errorMsg.textContent = "❌ Username atau password salah!";
+        errorMsg.style.color = "#b1003a";
+      }
+    });
+  </script>
+</body>
+</html>

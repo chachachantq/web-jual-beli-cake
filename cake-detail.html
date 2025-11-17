@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Cake - ShopiaCake</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: #fff8f8;
+    }
+    header {
+      background: #ff6b81;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a, .logout-btn {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    nav a:hover, .logout-btn:hover {
+      text-decoration: underline;
+      transform: scale(1.05);
+    }
+    .cake-detail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      animation: fadeIn 0.6s ease-in;
+    }
+    .detail-card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 450px;
+      text-align: center;
+      animation: popIn 0.5s ease-in;
+    }
+    .detail-card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+    .buy-btn {
+      background: #ff6b81;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    .buy-btn:hover {
+      background: #ff8fa3;
+      transform: scale(1.05);
+    }
+    .info-section {
+      text-align: left;
+      margin-top: 25px;
+      background: #fff2f2;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    .info-section h3 {
+      color: #ff6b81;
+      margin-bottom: 10px;
+    }
+    footer {
+      background: #ff6b81;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Detail Produk</h1>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Tentang</a>
+      <a href="contact.html">Kontak</a>
+      <button onclick="logout()" class="logout-btn">Logout</button>
+    </nav>
+  </header>
+
+  <section id="cake-detail" class="cake-detail"></section>
+
+  <footer>
+    <p>© 2025 Shopia Cake Shop</p>
+  </footer>
+
+  <script>
+    
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "login.html";
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const jenis = urlParams.get('cake')?.toLowerCase(); 
+
+    const dataCake = {
+      chocolate: {
+        nama: "Chocolate Cake",
+        harga: "Rp 120.000",
+        gambar: "cokelate.jpg",
+        deskripsi: "Kue cokelat lembut dengan rasa manis pekat dan aroma khas kakao premium.",
+        info: {
+          rasa: "Rasa manis lembut berpadu dengan aroma cokelat yang kuat dan legit di setiap gigitan.",
+          saran: "Nikmati bersama segelas susu hangat atau kopi hitam untuk sensasi sempurna."
+        }
+      },
+      cherry: {
+        nama: "Cokelate Cherry Cake",
+        harga: "Rp 100.000",
+        gambar: "cokelate cherry.jpg",
+        deskripsi: "Perpaduan cokelat lembut dan buah cherry segar, menciptakan cita rasa manis asam yang seimbang.",
+        info: {
+          rasa: "Perpaduan rasa cokelat manis dan asam segar dari cherry yang menyegarkan.",
+          saran: "Cocok disajikan dingin saat acara sore atau pesta ulang tahun."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      anniversarychoco: {
+        nama: "anniversary_choco",
+        harga: "Rp 200.000",
+        gambar: "anniv1.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      },
+      engagement: {
+        nama: "Engagement Cake",
+        harga: "Rp 110.000",
+        gambar: "engagement cokelate.jpg",
+        deskripsi: "Kue istimewa dengan desain elegan, cocok untuk momen lamaran atau ulang tahun romantis.",
+        info: {
+          rasa: "Rasa lembut dan manis dengan sentuhan keju yang ringan, menghadirkan kesan eksklusif.",
+          saran: "Sajikan dalam suhu ruang agar tekstur lembut buttercream tetap sempurna."
+        }
+      }
+    };
+
+    const cake = dataCake[jenis];
+    const container = document.getElementById("cake-detail");
+
+    if (cake) {
+      container.innerHTML = `
+        <div class="detail-card">
+          <img src="${cake.gambar}" alt="${cake.nama}">
+          <h2>${cake.nama}</h2>
+          <p>${cake.deskripsi}</p>
+          <p><strong>${cake.harga}</strong></p>
+          <button class="buy-btn" onclick="beli('${cake.nama}', '${cake.harga}', '${cake.gambar}')">Beli Sekarang</button>
+
+          <div class="info-section">
+            <h3>Tentang Cake Ini</h3>
+            <p><strong>Bahan Utama:</strong> ${cake.info.bahan}</p>
+            <p><strong>Cita Rasa:</strong> ${cake.info.rasa}</p>
+            <p><strong>Rekomendasi Penyajian:</strong> ${cake.info.saran}</p>
+          </div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <div class="detail-card">
+          <h2>Produk tidak ditemukan</h2>
+          <p>Pastikan kamu membuka halaman dengan URL yang benar, misalnya:</p>
+          <p><code>cake-detail.html?cake=chocolate</code></p>
+          <a href="menu.html" class="buy-btn">Kembali ke Menu</a>
+        </div>
+      `;
+    }
+
+    function beli(nama, harga, gambar) {
+      localStorage.setItem("produkDipilih", ({ nama, harga, gambar }));
+      window.location.href = "pembelian.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Cake - Shopia Cake Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Shopia Cake Shop</h1>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Tentang</a>
+      <a href="contact.html">Kontak</a>
+      <button onclick="logout()" class="logout-btn">Logout</button>
+    </nav>
+  </header>
+
+  <section id="cake-detail" class="cake-detail"></section>
+
+  <footer>
+    <p>© 2025 Shopia Cake Shop</p>
+  </footer>
+
+  <script>
+    const cakes = {
+      chocolate: {
+        name: "Chocolate Cake",
+        price: "Rp 120.000",
+        img: "cokelate.jpg",
+        desc: "Kue cokelat lembut dengan lapisan fudge dan aroma kakao premium 🍫."
+      },
+      cherry: {
+        name: "Chocolate Cherry Cake",
+        price: "Rp 135.000",
+        img: "cokelate cherry.jpg",
+        desc: "Kue cokelat legit dengan topping ceri segar dan krim lembut 🍒."
+      },
+      engagement: {
+        name: "Engagement Cake",
+        price: "Rp 200.000",
+        img: "engagement cokelate.jpg",
+        desc: "Cake elegan untuk momen pertunanganmu 💍 dengan dekorasi lembut dan rasa manis yang pas."
+      },
+      anniversary_choco: {
+        name: "Anniversary Cake",
+        price: "Rp 220.000",
+        img: "anniv1.jpg",
+        desc: "Cake separuh cokelat untuk pasangan yang ingin berbagi manisnya cinta 💞."
+      },
+      anniversary_love: {
+        name: "Anniversary Cake (Love)",
+        price: "Rp 250.000",
+        img: "anniv2.jpg",
+        desc: "Cake dengan hiasan berbentuk hati, cocok untuk merayakan cinta sejati 💖."
+      },
+      birthday_strawberry: {
+        name: "Birthday Cake Strawberry & Keju",
+        price: "Rp 180.000",
+        img: "bd keju cokelate batang.jpg",
+        desc: "Cake ulang tahun manis dengan topping cokelat batang, strawberry segar, dan keju 🧀🍓."
+      },
+      pink_butterfly: {
+        name: "Pink Kupu-Kupu 2 Tingkat",
+        price: "Rp 300.000",
+        img: "bd pink kupu.jpg",
+        desc: "Cake dua tingkat dengan hiasan kupu-kupu pink cantik 🦋 cocok untuk pesta ulang tahun."
+      },
+      unicorn: {
+        name: "Unicorn Cake",
+        price: "Rp 280.000",
+        img: "",
+        desc: "Kue bertema unicorn yang imut dan lembut dengan warna pastel yang memanjakan mata 🦄."
+      },
+      karamel: {
+        name: "Bolu Caramel",
+        price: "Rp 100.000",
+        img: "",
+        desc: "Bolu karamel lembut dengan rasa manis khas gula yang dipanggang sempurna dan gurih dari keju yang menimpa dasar cake🍮."
+      },
+      khitan_dino: {
+        name: "Cake Khitanan Dinosaurus",
+        price: "Rp 230.000",
+        img: "",
+        desc: "Cake khitanan dengan tema dinosaurus dan krim hijau cerah 🦖 cocok untuk anak-anak."
+      },
+      khitan_mixue: {
+        name: "Cake Khitanan Mixue",
+        price: "Rp 240.000",
+        img: "",
+        desc: "Cake lucu bertema Mixue yang manis dan lembut, pas untuk momen spesial anak 🍦."
+      }
+    };
+
+    
+    const params = new URLSearchParams(window.location.search);
+    const cakeName = params.get("cake");
+    const cake = cakes[cakeName];
+
+    const content = document.getElementById("cake-detail");
+
+    if (cake) {
+      content.innerHTML = `
+        <div class="detail-card">
+          <img src="${cake.img}" alt="${cake.name}">
+          <div class="info">
+            <h2>${cake.name}</h2>
+            <p class="price">${cake.price}</p>
+            <p class="desc">${cake.desc}</p>
+            <button class="buy-btn" onclick="beli()">Beli Sekarang</button>
+          </div>
+        </div>
+      `;
+    } else {
+      content.innerHTML = `
+        <div class="not-found">
+          <h2>Produk tidak ditemukan</h2>
+          <a href="menu.html" class="btn">Kembali ke Menu</a>
+        </div>
+      `;
+    }
+
+   
+<button class="buy-btn" onclick="beli()"></button>
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

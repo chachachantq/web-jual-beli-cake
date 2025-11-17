@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopiaCake - Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <header>
+    <h1>Shopia Cake Shop</h1> 
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="menu.html" class="active">Menu</a>
+      <a href="about.html">Tentang</a>
+      <a href="contact.html">Kontak</a>
+      <button onclick="logout()" class="logout-btn">Logout</button>
+    </nav>
+  </header>
+
+  <section class="menu">
+    <h2>Daftar Cake Kami</h2>
+    <div class="cakes">
+
+      <div class="cake">
+        <img src="cokelate.jpg" alt="Chocolate Cake">
+        <h3>Chocolate Cake</h3>
+        <p>Rp 120.000</p>
+        <button class="buy-btn" onclick="detailCake('chocolate')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="cokelate cherry.jpg" alt="Cokelate Cherry Cake">
+        <h3>Cokelate Cherry Cake</h3>
+        <p>Rp 135.000</p>
+        <button class="buy-btn" onclick="detailCake('cherry')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="engagement cokelate.jpg" alt="Engagement Cake">
+        <h3>Engagement Cake</h3>
+        <p>Rp 200.000</p>
+        <button class="buy-btn" onclick="detailCake('engagement')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="anniv1.jpg" alt="anniversary_choco">
+        <h3>Anniversary Chokelate</h3>
+        <p>Rp 200.000</p>
+        <button class="buy-btn" onclick="detailCake('anniversary_choco')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="anniv2.jpg" alt="anniversary_love">
+        <h3>Anniversary Love</h3>
+        <p>Rp 180.000</p>
+        <button class="buy-btn" onclick="detailCake('anniversary_love')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="bd keju cokelate batang .jpg" alt="birthday_strawberry">
+        <h3>Anniversary Chokelate</h3>
+        <p>Rp 180.000</p>
+        <button class="buy-btn" onclick="detailCake('birthday_strawberry')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="bd pink kupu.jpg" alt="pink pink_butterfly">
+        <h3>Pink Butterfly</h3>
+        <p>Rp 3000.000</p>
+        <button class="buy-btn" onclick="detailCake('pink_butterfly')">Beli Sekarang</button>
+      </div>
+      
+      <div class="cake">
+        <img src="bd unicorn.jpg" alt="birthday_unicorn">
+        <h3>Unicorn</h3>
+        <p>Rp 280.000</p>
+        <button class="buy-btn" onclick="detailCake('birthday_unicorn')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="caramel cake.jpg" alt="karamel">
+        <h3>Caramel cake</h3>
+        <p>Rp 25.000</p>
+        <button class="buy-btn" onclick="detailCake('karamel')">Beli Sekarang</button>
+      </div>
+      
+      <div class="cake">
+        <img src="khitanan1.jpg" alt="khitan_dino">
+        <h3>khitan Cake Dino</h3>
+        <p>Rp 2300.000</p>
+        <button class="buy-btn" onclick="detailCake('khitan_dino')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="khitanan2.jpg" alt="khitan_mixue">
+        <h3>Khitan Cake Mixue</h3>
+        <p>Rp 230.000</p>
+        <button class="buy-btn" onclick="detailCake('khitan_mixue')">Beli Sekarang</button>
+      </div>
+
+      <div class="cake">
+        <img src="bd keju cokelate batang .jpg" alt="birthday_strawberry">
+        <h3>Anniversary Chokelate</h3>
+        <p>Rp 230.000</p>
+        <button class="buy-btn" onclick="detailCake('birthday_strawberry')">Beli Sekarang</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Shopia Cake Shop</p>
+  </footer>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "login.html";
+    }
+
+    function detailCake(jenis) {
+      window.location.href = `cake-detail.html?cake=${jenis}`;
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopiaCake - Beranda</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+  <header>
+    <h1>Shopia Cake Shop</h1>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Tentang</a>
+      <a href="contact.html">Kontak</a>
+      <button onclick="logout()" class="logout-btn">Logout</button>
+
+<script>
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
+</script>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Selamat Datang di Shopia cake</h2>
+    <p>Kue lezat dan manis untuk setiap momen spesialmu 🍰</p>
+    <a class="btn" href="menu.html">Lihat Menu</a>
+  </section>
+<br>
+<br>
+  <footer>
+    <p>© 2025 Shopia Cake Shop</p>
+  </footer>
+</body>
+</html>

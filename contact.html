@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontak - ShopiaCake</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+  
+  if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+  <header>
+    <h1>Shopia Cake Shop</h1>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Tentang</a>
+      <a href="contact.html" class="active">Kontak</a>
+       <button onclick="logout()" class="logout-btn">Logout</button>
+
+<script>
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
+</script>
+    </nav>
+  </header>
+
+  <section class="contact">
+    <h2 align="center">Hubungi Kami</h2>
+    <form>
+      <input type="text" placeholder="Nama Anda" required>
+      <input type="email" placeholder="Email Anda" required>
+      <textarea placeholder="Pesan Anda" required></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Shopia Cake Shop</p>
+  </footer>
+</body>
+</html>

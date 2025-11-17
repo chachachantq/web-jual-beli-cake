@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Kami - ShopiaCake</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+  
+  if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+  <header>
+    <h1>Shopia Cake Shop</h1>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html" class="active">Tentang</a>
+      <a href="contact.html">Kontak</a>
+       <button onclick="logout()" class="logout-btn">Logout</button>
+
+<script>
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
+</script>
+    </nav>
+  </header>
+
+  <section class="about">
+    <h2 align="center">Tentang Kami</h2>
+    <p>ShopiaCake berdiri sejak tahun 2020 dengan misi menghadirkan kue terbaik yang dibuat dari bahan berkualitas tinggi dan penuh cinta 💕.
+      Awalnya ShopiaCake mengadakan kue kering untuk lebaran dan menjualkannya setiap tahun. Namun seiring berjalannya waktu, kita terinspirasi
+    mengadakan juga cake ulang tahun, dan lain-lain yang selalu berjalan setiap ada yang memesannya.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Shopia Cake Shop</p>
+  </footer>
+</body>
+</html>

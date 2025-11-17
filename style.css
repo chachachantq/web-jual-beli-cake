@@ -1,0 +1,357 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fffafc;
+  color: #333;
+  height: 100%;
+  margin: 0%;
+  display: flex;
+  flex-direction: column;
+}
+
+html,body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    flex-direction: column;
+}
+
+header {
+  background-color: #ffb6c1;
+  padding: 15px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a, .logout-btn{
+  text-decoration: none;
+  color: white;
+  margin: 0 10px;
+  font-weight: bold;
+  transition: 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+nav a:hover, .logout-btn:hover{
+  text-decoration: underline;
+}
+
+nav a.active, nav a:hover {
+  color: #5a0b35;
+}
+
+.hero {
+  flex: 1;
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #ffe4ec;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 40px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.btn {
+  background-color: #ff69b4;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 25px;
+}
+
+.menu .cakes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.cake {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 200px;
+}
+
+.cake img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.cake-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:50px;
+  animation: fadeIn 0.6s ease-in;
+}
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background-color: #ffb6c1;
+  color: white;
+  position: relative;
+  margin-top: auto;
+  width: 100%;
+  font-weight: 600;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+  gap: 10px;
+  padding: 20px;
+}
+
+.contact input, .contact textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.contact button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.logout-btn {
+  background-color: white;
+  color: #ff69b4;
+  border: 2px solid #ff69b4;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  background-color: #ff69b4;
+  color: white;
+}
+
+.login-page {
+  background: linear-gradient(135deg, #ffe4ec, #fff0f5, #ffeaf4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-container {
+  background-color: #ffffffcc;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.login-container h2 {
+  color: #ff69b4;
+  margin-bottom: 10px;
+}
+
+.login-container h2 span {
+  color: #ff1493;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ffc0cb;
+  border-radius: 25px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #ff69b4;
+  box-shadow: 0 0 5px #ffb6c1;
+}
+
+.btn-login {
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 0;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+  font-weight: bold;
+}
+
+.btn-login:hover {
+  background: linear-gradient(135deg, #ff85c1, #ff4081);
+  transform: scale(1.05);
+}
+
+#error-msg {
+  margin-top: 15px;
+  font-size: 14px;
+  color: red;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menu h2 {
+  text-align: center;
+  margin-top: 20px;
+  color: #ff69b4;
+}
+
+.cakes {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+
+.cake {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 220px;
+  cursor: pointer;
+  transform: scale(0.97);
+  transition: all 0.3s ease-in-out;
+  animation: fadeInUp 0.7s ease;
+}
+
+.cake:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(255, 105, 180, 0.3);
+}
+
+.cake img {
+  border-radius: 10px;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.cake:hover img {
+  transform: scale(1.05);
+}
+
+.buy-btn {
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.buy-btn:hover {
+  background: linear-gradient(135deg, #ff85c1, #ff4081);
+  transform: scale(1.1);
+}
+
+.buy-btn.bought {
+  background: #9acd32;
+  transform: scale(1.1);
+}
+
+.cake-detail {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  animation: fadeIn 1s ease;
+}
+@media (max-width: 768px) {
+.detail-card {
+  flex-direction: column;
+  background: #fff;
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  max-width: 800px;
+  align-items: center;
+  text-align: center;
+  animation: popIn 0.5s ease-in;
+}
+
+.detail-card img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+}
+
+.detail-card .info h2 {
+  color: #ff1493;
+  margin-bottom: 10px;
+}
+
+.price {
+  color: #ff69b4;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.desc {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  } to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }

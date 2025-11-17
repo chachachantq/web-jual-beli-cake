@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Halaman Pembayaran</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #ff69b4;
+        }
+
+        header {
+            background-color: #ff69b4;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: aquam;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .payment-details {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #449d44;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Halaman Pembayaran</h1>
+    </header>
+
+    <div class="container">
+        <h2>Pilih Metode Pembayaran</h2>
+
+        <label>
+            <input type="radio" name="metode_pembayaran" value="cod" onclick="tampilkanDetailPembayaran('cod')">
+            Bayar di Tempat (COD)
+        </label>
+
+        <label>
+            <input type="radio" name="metode_pembayaran" value="mbanking" onclick="tampilkanDetailPembayaran('mbanking')">
+            M-Banking (Transfer ATM)
+        </label>
+        <div id="mbanking_details" class="payment-details hidden">
+            <label for="bank">Pilih Bank:</label>
+            <select id="bank">
+                <option value="bca">BCA</option>
+                <option value="mandiri">Mandiri</option>
+                <option value="bni">BNI</option>
+            </select>
+            <label for="no_rekening">Nomor Rekening:</label>
+            <input type="text" id="no_rekening" name="no_rekening">
+        </div>
+
+        <label>
+            <input type="radio" name="metode_pembayaran" value="ovo" onclick="tampilkanDetailPembayaran('ovo')">
+            OVO
+        </label>
+
+        <label>
+            <input type="radio" name="metode_pembayaran" value="dana" onclick="tampilkanDetailPembayaran('dana')">
+            DANA
+        </label>
+
+        <label>
+            <input type="radio" name="metode_pembayaran" value="gopay" onclick="tampilkanDetailPembayaran('gopay')">
+            GoPay
+        </label>
+
+        <div id="ewallet_details" class="payment-details hidden">
+            <label for="no_hp">Nomor HP:</label>
+            <input type="text" id="no_hp" name="no_hp">
+        </div>
+
+        <h2>Alamat Pengiriman</h2>
+
+        <label for="provinsi">Provinsi:</label>
+        <select id="provinsi" name="provinsi" onchange="updateKabupaten()">
+            <option value="">Pilih Provinsi</option>
+        </select>
+
+        <label for="kabupaten">Kabupaten/Kota:</label>
+        <select id="kabupaten" name="kabupaten" onchange="updateKecamatan()">
+            <option value="">Pilih Kabupaten/Kota</option>
+        </select>
+
+        <label for="kecamatan">Kecamatan:</label>
+        <select id="kecamatan" name="kecamatan" onchange="updateDesa()">
+            <option value="">Pilih Kecamatan</option>
+              </select>
+
+        <label for="desa">Desa:</label>
+        <select id="desa" name="desa">
+            <option value="">Pilih Desa</option>
+        </select>
+
+        <label for="nama_jalan">Nama Jalan:</label>
+        <input type="text" id="nama_jalan" name="nama_jalan">
+
+        <button onclick="prosesPembayaran()">Proses Pembayaran</button>
+    </div>
+
+    <script>
+        const dataWilayah = {
+            "Aceh": {
+                "Kabupaten Aceh Barat": {
+                    "Kecamatan Johan Pahlawan": ["Desa Ujong Kalak", "Desa Pasar Aceh", "Desa Suak Indrapuri"],
+                    "Kecamatan Meureubo": ["Desa Meureubo", "Desa Ujong Baroh", "Desa Pasi Mesjid"]
+                },
+                "Kabupaten Aceh Selatan": {
+                    "Kecamatan Tapaktuan": ["Desa Lhok Ketapang", "Desa Pasar Tapaktuan", "Desa Hilir"],
+                    "Kecamatan Samadua": ["Desa Air Berudang", "Desa Gunung Cut", "Desa Tengah Pisang"]
+                }
+            },
+            "Sumatera Utara": {
+                "Kabupaten Asahan": {
+                    "Kecamatan Kisaran Barat": ["Kelurahan Kisaran Kota", "Kelurahan Sei Renggas", "Kelurahan Teladan"],
+                    "Kecamatan Air Batu": ["Desa Air Genting", "Desa Hessa Air Genting", "Desa Pinanggripan"]
+                },
+                "Kota Medan": {
+                    "Kecamatan Medan Kota": ["Kelurahan Pasar Baru", "Kelurahan Kotamatsum IV", "Kelurahan Mesjid"],
+                    "Kecamatan Medan Amplas": ["Kelurahan Amplas", "Kelurahan Sitirejo II", "Kelurahan Harjosari II"]
+                }
+            },
+            "Jawa Barat": {
+                "Kabupaten Bandung": {
+                    "Kecamatan Cileunyi": ["Desa Cileunyi Kulon", "Desa Cileunyi Wetan", "Desa Cibiru Hilir"],
+                    "Kecamatan Bojongsoang": ["Desa Bojongsoang", "Desa Cipagalo", "Desa Lengkong"]
+                },
+                "Kota Bandung": {
+                    "Kecamatan Bandung Wetan": ["Kelurahan Cihapit", "Kelurahan Tamansari", "Kelurahan Braga"],
+                    "Kecamatan Sumur Bandung": ["Kelurahan Babakan Ciamis", "Kelurahan Braga", "Kelurahan Kebon Pisang"]
+                },
+                "Kabupaten Garut": {
+                    "Kecamatan Garut Kota": ["Kelurahan Kota Kulon", "Kelurahan Paminggir", "Kelurahan Sukamantri"],
+                    "Kecamatan Tarogong Kidul": ["Kelurahan Jayawaras", "Kelurahan Pataruman", "Kelurahan Sukagalih"]
+                },
+                "Kabupaten Sumedang": {
+                    "Kecamatan Sumedang Utara": ["Kelurahan Kota Kaler", "Kelurahan Regol Wetan", "Kelurahan Talun"],
+                    "Kecamatan Ganeas": ["Desa Cikondang", "Desa Dayeuh Luhur", "Desa Sukatani"]
+                },
+                "Kabupaten Kuningan": {
+                    "Kecamatan Kuningan": ["Kelurahan Kuningan", "Kelurahan Awirarangan", "Kelurahan Cigugur"],
+                    "Kecamatan Cigugur": ["Desa Cigugur", "Desa Gunungkeling", "Desa Puncak"]
+                },
+                "Kota Cirebon": {
+                    "Kecamatan Lemahwungkuk": ["Kelurahan Lemahwungkuk", "Kelurahan Pegambiran", "Kelurahan Panjunan"],
+                    "Kecamatan Kejaksan": ["Kelurahan Kejaksan", "Kelurahan Kebon Baru", "Kelurahan Sukapura"]
+                },
+                "Kabupaten Majalengka": {
+                    "Kecamatan Majalengka": ["Kelurahan Majalengka Kulon", "Kelurahan Majalengka Wetan", "Kelurahan Cigasong"],
+                    "Kecamatan Maja": ["Desa Maja Selatan", "Desa Maja Utara", "Desa Pasanggrahan", "Desa Cihaur", "Desa Pageraji"],
+                    "Kecamatan Argapura": ["Desa Sukasari Kaler", "Desa Sukasari Kidul", "Desa Argalingga", "Desa Cihaur", "Desa Pageraji"]
+                },
+                },
+                "Kota Bogor": {
+                    "Kecamatan Bogor Tengah": ["Kelurahan Babakan", "Kelurahan Cibogor", "Kelurahan Gudang"],
+                    "Kecamatan Bogor Selatan": ["Kelurahan Cipaku", "Kelurahan Lawanggintung", "Kelurahan Mulyaharja"]
+                }
+            },
+            "Jawa Tengah": {
+                "Kota Surakarta (Solo)": {
+                    "Kecamatan Pasar Kliwon": ["Kelurahan Pasar Kliwon", "Kelurahan Kauman", "Kelurahan Semanggi"],
+                    "Kecamatan Jebres": ["Kelurahan Jebres", "Kelurahan Pucangsawit", "Kelurahan Mojosongo"]
+                },
+                "Kota Salatiga": {
+                    "Kecamatan Sidorejo": ["Kelurahan Salatiga", "Kelurahan Kalicacing", "Kelurahan Pulutan"],
+                    "Kecamatan Tingkir": ["Kelurahan Tingkir Tengah", "Kelurahan Gendongan", "Kelurahan Kutowinangun Kidul"]
+                },
+                "Kota Semarang": {
+                    "Kecamatan Semarang Tengah": ["Kelurahan Bangunharjo", "Kelurahan Jagalan", "Kelurahan Pekunden"],
+                    "Kecamatan Semarang Selatan": ["Kelurahan Barusari", "Kelurahan Randusari", "Kelurahan Wonodri"]
+                },
+                "Kabupaten Boyolali": {
+                    "Kecamatan Boyolali": ["Kelurahan Boyolali Kota", "Kelurahan Siswodipuran", "Kelurahan Banaran"],
+                    "Kecamatan Mojosongo": ["Desa Mojosongo", "Desa Karangnongko", "Desa Butuh"]
+                }
+            },
+            "Jawa Timur": {
+                "Kota Madiun": {
+                    "Kecamatan Manguharjo": ["Kelurahan Manguharjo", "Kelurahan Nambangan Lor", "Kelurahan Rejomulyo"],
+                    "Kecamatan Kartoharjo": ["Kelurahan Kartoharjo", "Kelurahan Kanigoro", "Kelurahan Pilangbango"]
+                },
+                "Kota Malang": {
+                    "Kecamatan Klojen": ["Kelurahan Klojen", "Kelurahan Bareng", "Kelurahan Oro-Oro Dowo"],
+                    "Kecamatan Kedungkandang": ["Kelurahan Kedungkandang", "Kelurahan Buring", "Kelurahan Wonokoyo"]
+                },
+                "Kabupaten Banyuwangi": {
+                    "Kecamatan Banyuwangi": ["Kelurahan Karangrejo", "Kelurahan Kampung Mandar", "Kelurahan Taman Baru"],
+                    "Kecamatan Giri": ["Kelurahan Giri", "Kelurahan Banjarsari", "Kelurahan Penataban"]
+                },
+              "Kabupaten Probolinggo": {
+                "Kecamatan Sumber": ["Desa Ledokombo", "Desa Sumbercenteng", "Desa Rambaan"],
+                "Kecamatan Sukapura": ["Desa Ngadisari", "Desa Wonotoro", "Desa Jetak"]
+              }
+            }
+        };
+
+        function tampilkanDetailPembayaran(metode) {
+            document.getElementById('mbanking_details').classList.add('hidden');
+            document.getElementById('ewallet_details').classList.add('hidden');
+
+            if (metode === 'mbanking') {
+                document.getElementById('mbanking_details').classList.remove('hidden');
+            } else if (metode === 'ovo' || metode === 'dana' || metode === 'gopay') {
+                document.getElementById('ewallet_details').classList.remove('hidden');
+            }
+        }
+
+        function prosesPembayaran() {
+            let metodePembayaran = document.querySelector('input[name="metode_pembayaran"]:checked');
+            if (!metodePembayaran) {
+                alert('Pilih metode pembayaran terlebih dahulu.');
+                return;
+            }
+            metodePembayaran = metodePembayaran.value;
+
+            let detailPembayaranValid = true;
+            if (metodePembayaran === 'mbanking') {
+                let bank = document.getElementById('bank').value;
+                let noRekening = document.getElementById('no_rekening').value;
+                if (!noRekening) {
+                    alert('Masukkan nomor rekening Anda.');
+                    detailPembayaranValid = false;
+                }
+            } else if (metodePembayaran === 'ovo' || metodePembayaran === 'dana' || metodePembayaran === 'gopay') {
+                let noHp = document.getElementById('no_hp').value;
+                if (!noHp) {
+                    alert('Masukkan nomor HP Anda.');
+                    detailPembayaranValid = false;
+                }
+            }
+
+            let provinsi = document.getElementById('provinsi').value;
+            let kabupaten = document.getElementById('kabupaten').value;
+            let kecamatan = document.getElementById('kecamatan').value;
+            let desa = document.getElementById('desa').value;
+            let namaJalan = document.getElementById('nama_jalan').value;
+
+            if (!provinsi || !kabupaten || !kecamatan || !desa || !namaJalan) {
+                alert('Mohon lengkapi semua informasi alamat pengiriman.');
+                return;
+            }
+
+            if (!detailPembayaranValid) {
+                return;
+            }
+            
+            alert('Terima kasih telah membeli produk kami! Pesanan Anda akan segera diproses.Jadi sabar tuunggu Bang Orang Sabar Disayang Tuhan😊🙏');
+
+            setTimeout(function() {
+                window.location.href = 'index.html'; 
+            }, 5000);
+        }
+
+        function isiOpsiProvinsi() {
+            let selectProvinsi = document.getElementById('provinsi');
+            for (let provinsi in dataWilayah) {
+                let option = document.createElement('option');
+                option.value = provinsi;
+                option.text = provinsi;
+                selectProvinsi.add(option);
+            }
+        }
+
+        function updateKabupaten() {
+            let selectProvinsi = document.getElementById('provinsi');
+            let selectKabupaten = document.getElementById('kabupaten');
+            let provinsiTerpilih = selectProvinsi.value;
+
+            selectKabupaten.innerHTML = '<option value="">Pilih Kabupaten/Kota</option>';
+
+            if (provinsiTerpilih) {
+                let kabupatenKota = dataWilayah[provinsiTerpilih];
+                for (let kabupaten in kabupatenKota) {
+                    let option = document.createElement('option');
+                    option.value = kabupaten;
+                    option.text = kabupaten;
+                    selectKabupaten.add(option);
+                }
+            }
+        }
+
+        function updateKecamatan() {
+            let selectProvinsi = document.getElementById('provinsi');
+            let selectKabupaten = document.getElementById('kabupaten');
+            let selectKecamatan = document.getElementById('kecamatan');
+            let provinsiTerpilih = selectProvinsi.value;
+            let kabupatenTerpilih = selectKabupaten.value;
+
+            selectKecamatan.innerHTML = '<option value="">Pilih Kecamatan</option>';
+
+            if (kabupatenTerpilih) {
+                let kecamatan = dataWilayah[provinsiTerpilih][kabupatenTerpilih];
+                for (let kec in kecamatan) {
+                    let option = document.createElement('option');
+                    option.value = kec;
+                    option.text = kec;
+                    selectKecamatan.add(option);
+                }
+            }
+        }
+
+        function updateDesa() {
+            let selectProvinsi = document.getElementById('provinsi');
+            let selectKabupaten = document.getElementById('kabupaten');
+            let selectKecamatan = document.getElementById('kecamatan');
+            let selectDesa = document.getElementById('desa');
+            let provinsiTerpilih = selectProvinsi.value;
+            let kabupatenTerpilih = selectKabupaten.value
+            let kecamatanTerpilih = selectKecamatan.value;
+
+           selectDesa.innerHTML = '<option value="">Pilih Desa</option>';
+
+            if (kecamatanTerpilih) {
+                let desa = dataWilayah[provinsiTerpilih][kabupatenTerpilih][kecamatanTerpilih];
+                for (let i = 0; i < desa.length; i++) {
+                    let option = document.createElement('option');
+                    option.value = desa[i];
+                    option.text = desa[i];
+                    selectDesa.add(option);
+                }
+            }
+        }
+
+        isiOpsiProvinsi();
+    </script>
+</body>
+</html>
